@@ -103,7 +103,7 @@ const Home = () => {
   const handleAboutClick = () => navigate('/about');
   const handleViewAll = () => navigate('/products');
 
-  // 🔥  Admin Dashboard navigation
+  // 🔥 Correct Admin Dashboard navigation
   const handleAdminAccess = () => navigate('/admin');
 
   useEffect(() => {
@@ -202,15 +202,7 @@ const Home = () => {
 
             <button onClick={handleAboutClick} className="border-2 border-white px-8 py-4 rounded-xl font-bold">
               Learn More
-            </button>
-
-            /* {/* ⭐ Admin Dashboard Button */}
-            {/* <button
-              onClick={handleAdminAccess}
-              className="border-2 border-yellow-300 text-yellow-300 px-6 py-3 rounded-xl font-bold"
-            >
-              Admin Dashboard
-            </button> */ */}
+            </button>          
           </div>
         </div>
       </section>
