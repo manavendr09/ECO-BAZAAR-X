@@ -139,43 +139,23 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = async () => {
-    if (!isAuthenticated) {
-      navigate('/auth', { state: { returnPath: `/product/${id}` } });
-      return;
-    }
-
     try {
-      // Get current cart from localStorage
-      const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
-      
-      // Check if product already exists in cart
-      const existingItemIndex = currentCart.findIndex(item => item.productId === product.id);
-      
-      if (existingItemIndex >= 0) {
-        // Update quantity
-        currentCart[existingItemIndex].quantity += 1;
-      } else {
-        // Add new item
-        currentCart.push({
-          productId: product.id,
-          name: product.name,
-          price: product.price,
-          image: product.imageUrl,
-          quantity: 1,
-          carbonScore: product.carbonScore,
-          isEcoFriendly: product.isEcoFriendly
-        });
-      }
-      
-      // Save updated cart
-      localStorage.setItem('cart', JSON.stringify(currentCart));
-      
-      // Show success message
+      // Add to client-side cart (localStorage) via customerAPI
+      await customerAPI.addToCart({
+        id: product.id, // use product id as cart item id
+        productId: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.imageUrl,
+        quantity: 1,
+        ecoScore: product.ecoScore || 90,
+        carbonScore: product.carbonScore,
+        isEcoFriendly: product.isEcoFriendly,
+      });
+
       alert(`✅ ${product.name} added to cart!`);
-      
-      // Update cart counter in navbar (trigger re-render)
-      window.dispatchEvent(new CustomEvent('cartUpdated'));
-      
+      // Dispatch event to update cart count in navbar
+      window.dispatchEvent(new Event('cartUpdated'));
     } catch (error) {
       console.error('Error adding to cart:', error);
       alert('❌ Failed to add to cart. Please try again.');

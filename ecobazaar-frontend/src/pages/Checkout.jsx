@@ -14,9 +14,10 @@ import {
   User
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { customerAPI, orderAPI } from '../services/api';
+import { orderAPI, authAPI, customerAPI } from '../services/api';
 import CarbonScore from '../components/common/CarbonScore';
 import EcoPointsRedemption from '../components/common/EcoPointsRedemption';
+import GreenerAlternative from '../components/cart/GreenerAlternative';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Checkout = () => {
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState('');
   const [error, setError] = useState('');
+  const currentUser = authAPI.getCurrentUser();
 
   // Form states
   const [shippingInfo, setShippingInfo] = useState({
@@ -76,29 +78,10 @@ const Checkout = () => {
       try {
         setLoading(true);
 
-        // Load cart from localStorage (authoritative source)
+        // Load cart from localStorage for now (backend cart already used on Cart page)
         const localCartRaw = localStorage.getItem('cart');
         const localCart = localCartRaw ? JSON.parse(localCartRaw) : [];
         setCart(Array.isArray(localCart) ? localCart : []);
-
-        // Try to prefill shipping info from profile if available
-        try {
-          const profileResponse = await customerAPI.getProfile();
-          const profile = profileResponse.data;
-          setShippingInfo({
-            firstName: profile.firstName || '',
-            lastName: profile.lastName || '',
-            email: profile.email || '',
-            phone: profile.phone || '',
-            address: profile.streetAddress || '',
-            city: profile.city || '',
-            state: profile.state || '',
-            zipCode: profile.zipCode || '',
-            country: profile.country || 'India'
-          });
-        } catch (profileError) {
-          console.warn('Profile not found, using empty form');
-        }
       } catch (error) {
         console.error('Error loading checkout data:', error);
         setError('Failed to load checkout data: ' + error.message);
@@ -117,7 +100,7 @@ const Checkout = () => {
   };
 
   const calculateSubtotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cart.reduce((total, item) => total + (Number(item.price) * item.quantity), 0);
   };
 
   const calculateShipping = () => {
@@ -126,6 +109,14 @@ const Checkout = () => {
 
   const calculateTotal = () => {
     return calculateSubtotal() + calculateShipping();
+  };
+
+  const handleReplaceItem = async (newItem) => {
+    // Reload cart after replacement
+    const localCartRaw = localStorage.getItem('cart');
+    const localCart = localCartRaw ? JSON.parse(localCartRaw) : [];
+    setCart(Array.isArray(localCart) ? localCart : []);
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const validateForm = () => {
@@ -154,31 +145,44 @@ const Checkout = () => {
     try {
       const shippingAddress = `${shippingInfo.firstName} ${shippingInfo.lastName}\n${shippingInfo.address}\n${shippingInfo.city}, ${shippingInfo.state} ${shippingInfo.zipCode}\n${shippingInfo.country}\nPhone: ${shippingInfo.phone}`;
       
+      if (!currentUser || !currentUser.userId) {
+        setError('You must be logged in to place an order.');
+        setProcessing(false);
+        return;
+      }
+
+      if (!cart || cart.length === 0) {
+        setError('Your cart is empty. Please add items before placing an order.');
+        setProcessing(false);
+        return;
+      }
+
+      // Prepare cart items for backend (need productId and quantity)
+      const cartItems = cart.map(item => ({
+        productId: item.productId || item.id,
+        quantity: item.quantity || 1
+      }));
+
+      // Prepare order data
       const orderData = {
-        shippingAddress,
-        paymentMethod: selectedPaymentMethod,
+        cartItems: cartItems,
+        shippingAddress: shippingAddress,
+        paymentMethod: selectedPaymentMethod.toUpperCase(),
         notes: notes || '',
-        cartItems: cart.map(item => {
-          return {
-            productId: item.productId,
-            quantity: item.quantity,
-            price: item.price
-          };
-        }),
-        // Add eco-points redemption data
-        ecoPointsUsed: ecoPointsRedemption.pointsUsed,
-        ecoPointsDiscount: ecoPointsRedemption.discountAmount,
-        isEcoBoost: ecoPointsRedemption.isEcoBoost
+        ecoPointsUsed: ecoPointsRedemption.pointsUsed || 0,
+        ecoPointsDiscount: ecoPointsRedemption.discountAmount || 0,
+        isEcoBoost: ecoPointsRedemption.isEcoBoost || false
       };
 
-      // Create order using the API service
+      // Create order using backend API
       const response = await orderAPI.createOrder(orderData);
-      
-      setOrderId(response.data.id);
-        setOrderComplete(true);
-      
-      // Clear localStorage cart
-      localStorage.removeItem('cart');
+
+      // Clear cart after successful order
+      await customerAPI.clearCart();
+      window.dispatchEvent(new Event('cartUpdated'));
+
+      setOrderId(response.data.id || response.data.orderId || '');
+      setOrderComplete(true);
     } catch (error) {
       console.error('Error placing order:', error);
       
@@ -538,19 +542,28 @@ const Checkout = () => {
               {/* Cart Items */}
               <div className="space-y-4 mb-6">
                 {cart.map((item) => (
-                  <div key={item.id} className="flex items-center p-4 bg-gray-50 rounded-lg">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-16 h-16 object-cover rounded-lg shadow-sm mr-4"
+                  <div key={item.id}>
+                    <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+                      <img
+                        src={item.image || item.imageUrl}
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded-lg shadow-sm mr-4"
+                      />
+                      <div className="flex-1">
+                        <h3 className="font-medium text-gray-900 text-sm mb-1">{item.name}</h3>
+                        <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-semibold text-gray-900">₹{(Number(item.price) * item.quantity).toLocaleString('en-IN')}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Greener Alternative Suggestion */}
+                    <GreenerAlternative
+                      productId={item.productId || item.id}
+                      currentProduct={item}
+                      onReplace={handleReplaceItem}
                     />
-                    <div className="flex-1">
-                      <h3 className="font-medium text-gray-900 text-sm mb-1">{item.name}</h3>
-                      <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold text-gray-900">₹{(item.price * item.quantity).toLocaleString('en-IN')}</p>
-                    </div>
                   </div>
                 ))}
               </div>

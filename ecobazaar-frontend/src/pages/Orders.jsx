@@ -12,7 +12,7 @@ import {
   MapPin,
   TreePine
 } from 'lucide-react';
-import { orderAPI } from '../services/api';
+import { orderAPI, authAPI } from '../services/api';
 import TreePlantingSubmission from '../components/tree-planting/TreePlantingSubmission';
 
 const Orders = () => {
@@ -22,15 +22,18 @@ const Orders = () => {
   const [showTreePlanting, setShowTreePlanting] = useState(false);
   const [treePlantingOrder, setTreePlantingOrder] = useState(null);
   const [treePlantingSubmissions, setTreePlantingSubmissions] = useState([]);
+  const currentUser = authAPI.getCurrentUser();
 
   useEffect(() => {
-    loadOrders();
-    loadTreePlantingSubmissions();
+    if (currentUser && currentUser.userId) {
+      loadOrders();
+    }
     
     // Set up auto-refresh for real-time updates every 30 seconds
     const interval = setInterval(() => {
-      loadOrders();
-      loadTreePlantingSubmissions();
+      if (currentUser && currentUser.userId) {
+        loadOrders();
+      }
     }, 30000);
     
     return () => clearInterval(interval);
@@ -39,6 +42,11 @@ const Orders = () => {
   const loadOrders = async () => {
     try {
       setLoading(true);
+      if (!currentUser || !currentUser.userId) {
+        setOrders([]);
+        setLoading(false);
+        return;
+      }
       const response = await orderAPI.getCustomerOrders();
       setOrders(response.data || []);
     } catch (error) {

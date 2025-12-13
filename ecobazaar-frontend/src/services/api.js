@@ -1,7 +1,11 @@
 import axios from 'axios';
 
 // Create axios instance with base configuration
+// EcoBazaar backend runs on port 8081 with REST endpoints prefixed by `/api`
 const API_BASE_URL = 'http://localhost:8081/api';
+
+// Smart Cart backend runs on port 8080 (for suggestions)
+const SMART_CART_API_BASE_URL = 'http://localhost:8080/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -10,18 +14,32 @@ const api = axios.create({
   },
 });
 
-// Add request interceptor to include auth token
+// Smart Cart API instance for suggestions
+const smartCartApi = axios.create({
+  baseURL: SMART_CART_API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Add request interceptor to include auth token (from localStorage)
+// but skip it for public endpoints like products and categories.
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
-    if (token) {
+    const url = config.url || '';
+
+    const isPublicEndpoint =
+      url.startsWith('/products') ||
+      url.startsWith('/categories');
+
+    if (token && !isPublicEndpoint) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Mock product data for realistic e-commerce experience
@@ -214,29 +232,15 @@ export const mockCategories = [
   { id: 6, name: "Personal Care", icon: "🧴", description: "Natural and organic personal care" }
 ];
 
-// Request interceptor to add auth token
-api.interceptors.request.use(
-  (config) => {
-    const token = sessionStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 // Response interceptor to handle errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       // Token expired or invalid
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('user');
-      window.location.href = '/login';
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/auth';
     }
     return Promise.reject(error);
   }
@@ -436,6 +440,21 @@ export const paymentAPI = {
   }
 };
 
+// Cart API calls
+export const cartAPI = {
+  // Get cart for a user
+  getCart: (userId) => api.get(`/cart/${userId}`),
+  
+  // Update cart item quantity
+  updateCartItem: (id, quantity) => api.put(`/cart/${id}`, { quantity }),
+  
+  // Remove item from cart
+  removeFromCart: (id) => api.delete(`/cart/${id}`),
+  
+  // Add item to cart
+  addToCart: (userId, productId, quantity) => api.post(`/cart/${userId}/add`, { productId, quantity })
+};
+
 // Customer API calls
 export const customerAPI = {
   // Profile management
@@ -471,7 +490,7 @@ export const customerAPI = {
   getWishlistCount: () => api.get('/customer/wishlist/count'),
   clearWishlist: () => api.delete('/customer/wishlist'),
 
-  // Get customer cart
+  // Get customer cart (stored client-side, synced to backend only at checkout)
   getCart: () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     return Promise.resolve({ data: cart });
@@ -519,7 +538,7 @@ export const customerAPI = {
     return Promise.resolve({ data: [] });
   },
   
-  // Get customer orders
+  // Get customer orders (backend uses JWT to infer current user)
   getOrders: () => api.get('/orders/customer')
 };
 
@@ -715,6 +734,12 @@ export const treePlantingAPI = {
     adminNotes
   }),
   getStats: () => api.get('/tree-planting/stats')
+};
+
+// Suggestion API (uses smart-cart-backend)
+export const suggestionAPI = {
+  // Get greener alternative for a product
+  getGreenerAlternative: (productId) => smartCartApi.get(`/suggestions/product/${productId}`)
 };
 
 export default api;

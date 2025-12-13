@@ -39,8 +39,14 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+        // Try to get product with relations first
+        Product product = productRepository.findByIdWithRelations(id);
+        // If not found, try regular findById as fallback
+        if (product == null) {
+            product = productRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+        }
+        return product;
     }
 
     public List<Product> getProductsByCategory(Long categoryId) {
