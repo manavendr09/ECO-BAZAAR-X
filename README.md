@@ -50,7 +50,8 @@ The platform supports **three user roles** — Customer, Seller, and Admin — e
 
 ## 🏗️ System Architecture
 
-![Architecture Diagram](./assets/architecture.png)
+<img width="1234" height="548" alt="image" src="https://github.com/user-attachments/assets/c4771738-8e13-4c7b-bd43-2413aab3eae5" />
+
 
 ```
 Browser → Vercel (React + Vite) ──[HTTPS + JWT]──► Render (Spring Boot) ──► Clever Cloud (MySQL)
