@@ -284,8 +284,8 @@ const AdminDashboard = () => {
       const mockCustomers = [
         {
           id: 7,
-          name: "Pushpa Priya",
-          email: "pushpapriya@gmail.com",
+          name: "Manavendra Yadav",
+          email: "manavendraayadav2617@gmail.com",
           orders: [],
           totalOrders: 3,
           totalSpent: 2596.00,
@@ -790,11 +790,7 @@ const AdminDashboard = () => {
       <header className="admin-header">
         <div className="admin-header-left">
           <div className="admin-logo">
-            <img 
-              src="/Main Navigator Logo.png" 
-              alt="EcoBazaarX Logo" 
-              className="admin-logo-image"
-            />
+        
           </div>
         </div>
         <div className="admin-header-right">
@@ -1018,7 +1014,7 @@ const AdminDashboard = () => {
                   </div>
                   <div className="admin-stat-content">
                     <h3>Total Users</h3>
-                    <p className="admin-stat-value">{overviewData.totalUsers || 0}</p>
+                    {/* <p className="admin-stat-value">{overviewData.totalUsers || 0}</p> */}
                     <span className="admin-stat-change positive">+12.5%</span>
                   </div>
                 </div>
@@ -1029,7 +1025,7 @@ const AdminDashboard = () => {
                   </div>
                   <div className="admin-stat-content">
                     <h3>Active Sellers</h3>
-                    <p className="admin-stat-value">{overviewData.activeSellers || 0}</p>
+                    {/* <p className="admin-stat-value">{overviewData.activeSellers || 0}</p> */}
                     <span className="admin-stat-change positive">+8.2%</span>
                   </div>
                 </div>
@@ -1040,7 +1036,7 @@ const AdminDashboard = () => {
                   </div>
                   <div className="admin-stat-content">
                     <h3>Products Listed</h3>
-                    <p className="admin-stat-value">{overviewData.totalProducts || 0}</p>
+                    {/* <p className="admin-stat-value">{overviewData.totalProducts || 0}</p> */}
                     <span className="admin-stat-change positive">+15.3%</span>
                   </div>
                 </div>
@@ -1051,7 +1047,7 @@ const AdminDashboard = () => {
                   </div>
                   <div className="admin-stat-content">
                     <h3>Carbon Impact</h3>
-                    <p className="admin-stat-value">{(overviewData.totalCarbonImpact || 0).toFixed(2)}t</p>
+                    {/* <p className="admin-stat-value">{(overviewData.totalCarbonImpact || 0).toFixed(2)}t</p> */}
                     <span className="admin-stat-change negative">-18.7%</span>
                   </div>
                 </div>
@@ -1062,7 +1058,7 @@ const AdminDashboard = () => {
                   </div>
                   <div className="admin-stat-content">
                     <h3>Pending Applications</h3>
-                    <p className="admin-stat-value">{overviewData.pendingApplications || 0}</p>
+                    {/* <p className="admin-stat-value">{overviewData.pendingApplications || 0}</p> */}
                     <span className="admin-stat-change neutral">New</span>
                   </div>
                 </div>

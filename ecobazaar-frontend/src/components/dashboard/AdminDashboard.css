@@ -1,4 +1,4 @@
-/* Admin Dashboard Styles */
+Admin Dashboard Styles
 .admin-dashboard {
   min-height: 100vh;
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
@@ -4622,5 +4622,1723 @@
   
   .admin-submissions-grid {
     grid-template-columns: 1fr;
+  }
+}
+/* ======================================================
+   BLUE THEME VARIABLES (PRIMARY COLOR: #1E3EA7)
+   ====================================================== */
+
+:root {
+  --primary: #1E3EA7;
+  --primary-dark: #162F86;
+  --primary-light: #3A5BD9;
+
+  --primary-bg-soft: rgba(30, 62, 167, 0.08);
+  --primary-bg-medium: rgba(30, 62, 167, 0.15);
+  --primary-bg-strong: rgba(30, 62, 167, 0.3);
+
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --gray-text: #64748B;
+  --dark-text: #0F172A;
+}
+
+/* ======================================================
+   ADMIN DASHBOARD BASE
+   ====================================================== */
+
+.admin-dashboard {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #f4f6ff 0%,
+    #eef1ff 50%,
+    #e6ebff 100%
+  );
+  font-family: 'Inter', sans-serif;
+}
+
+/* ======================================================
+   HEADER
+   ====================================================== */
+
+.admin-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(135deg, var(--primary), var(--primary-dark)) 1;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  color: var(--dark-text);
+  box-shadow:
+    0 4px 16px var(--primary-bg-soft),
+    0 2px 8px var(--primary-bg-soft);
+}
+
+.admin-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-logo-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--primary);
+}
+
+.admin-logo h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark),
+    var(--primary)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ======================================================
+   USER INFO
+   ====================================================== */
+
+.admin-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--primary-bg-strong);
+}
+
+.admin-avatar-icon {
+  width: 16px;
+  height: 16px;
+  color: white;
+}
+
+.admin-user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.admin-user-role {
+  font-size: 0.75rem;
+  color: var(--primary);
+}
+
+/* ======================================================
+   NOTIFICATIONS ICON
+   ====================================================== */
+
+.admin-notifications {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--primary-bg-soft);
+  border: 1px solid var(--primary-bg-medium);
+  transition: all 0.2s ease;
+}
+
+.admin-notifications:hover {
+  background: var(--primary-bg-medium);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--primary-bg-strong);
+}
+
+.admin-notification-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary) !important;
+}
+
+.admin-notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--danger);
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* ======================================================
+   CONTENT LAYOUT
+   ====================================================== */
+
+.admin-content {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+/* ======================================================
+   SIDEBAR
+   ====================================================== */
+
+.admin-sidebar {
+  width: 240px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--primary-bg-soft);
+  padding: 1.5rem 0;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0 1rem;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 8px;
+  color: var(--gray-text);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+}
+
+.admin-nav-item:hover {
+  background: var(--primary-bg-soft);
+  color: var(--primary);
+}
+
+.admin-nav-item.active {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+  box-shadow: 0 4px 12px var(--primary-bg-strong);
+}
+
+.admin-nav-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ======================================================
+   MAIN CONTENT
+   ====================================================== */
+
+.admin-main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* ======================================================
+   PAGE HEADER
+   ====================================================== */
+
+.admin-page-header {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 62, 167, 0.04) 0%,
+    rgba(30, 62, 167, 0.02) 100%
+  );
+  border: 1px solid var(--primary-bg-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--primary-light),
+    var(--primary-dark)
+  );
+}
+
+.admin-page-header h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--dark-text), #374151);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-page-header p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--gray-text);
+}
+
+/* ======================================================
+   PRIMARY BUTTONS
+   ====================================================== */
+
+.admin-refresh-btn,
+.admin-add-btn,
+.admin-view-btn,
+.admin-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px var(--primary-bg-strong);
+}
+
+.admin-refresh-btn:hover,
+.admin-add-btn:hover,
+.admin-view-btn:hover,
+.admin-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--primary-bg-strong);
+}
+
+/* ======================================================
+   SECONDARY / NEUTRAL BUTTONS
+   ====================================================== */
+
+.admin-btn-secondary,
+.admin-back-btn {
+  background: #f1f5f9;
+  color: var(--gray-text);
+  border: 1px solid #e5e7eb;
+  padding: 0.65rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-btn-secondary:hover,
+.admin-back-btn:hover {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+/* ======================================================
+   DANGER / WARNING BUTTONS
+   ====================================================== */
+
+.admin-reject-btn,
+.admin-delete-btn,
+.admin-remove-btn {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-reject-btn:hover,
+.admin-delete-btn:hover,
+.admin-remove-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
+}
+
+/* ======================================================
+   LOADING STATES
+   ====================================================== */
+
+.admin-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--gray-text);
+  font-size: 1rem;
+}
+
+.admin-loading-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+  animation: spin 1s linear infinite;
+}
+
+/* ======================================================
+   STATS GRID
+   ====================================================== */
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.admin-stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.25rem;
+  border: 1px solid var(--primary-bg-soft);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ======================================================
+   STAT ICONS (BLUE THEME)
+   ====================================================== */
+
+.admin-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+}
+
+.admin-stat-icon-svg {
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+/* ======================================================
+   STAT CONTENT
+   ====================================================== */
+
+.admin-stat-content h3 {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-text);
+  margin-bottom: 0.4rem;
+}
+
+.admin-stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--dark-text);
+}
+
+/* ======================================================
+   STAT CHANGE BADGES
+   ====================================================== */
+
+.admin-stat-change {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.admin-stat-change.positive {
+  background: var(--primary-bg-soft);
+  color: var(--primary);
+}
+
+.admin-stat-change.negative {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+}
+
+.admin-stat-change.neutral {
+  background: rgba(100, 116, 139, 0.1);
+  color: var(--gray-text);
+}
+
+/* ======================================================
+   STATUS & ROLE BADGES
+   ====================================================== */
+
+.admin-status-badge,
+.admin-role-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.admin-status-green,
+.admin-role-seller {
+  background: var(--primary-bg-soft);
+  color: var(--primary);
+}
+
+.admin-status-yellow {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--warning);
+}
+
+.admin-status-red,
+.admin-role-admin {
+  background: rgba(239, 68, 68, 0.12);
+  color: #EF4444;
+}
+
+.admin-role-customer {
+  background: rgba(59, 130, 246, 0.12);
+  color: #3B82F6;
+}
+
+/* ======================================================
+   SEARCH & FILTER BAR
+   ====================================================== */
+
+.admin-search-filter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.admin-search {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+}
+
+.admin-search-icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--gray-text);
+}
+
+.admin-search-input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--primary-bg-medium);
+  font-size: 0.875rem;
+  background: white;
+  transition: all 0.25s ease;
+}
+
+.admin-search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg-soft);
+}
+
+.admin-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-filter-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--gray-text);
+}
+
+.admin-filter-select {
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--primary-bg-medium);
+  font-size: 0.875rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.admin-filter-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg-soft);
+}
+
+/* ======================================================
+   TABLE CONTAINER
+   ====================================================== */
+
+.admin-table-container {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid var(--primary-bg-soft);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+/* ======================================================
+   TABLE
+   ====================================================== */
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.admin-table thead th {
+  background: #f8fafc;
+  padding: 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  text-align: left;
+  border-bottom: 1px solid var(--primary-bg-soft);
+}
+
+.admin-table tbody td {
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: #374151;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.admin-table tbody tr:hover {
+  background: var(--primary-bg-soft);
+}
+
+/* ======================================================
+   USER INFO CELL
+   ====================================================== */
+
+.admin-user-info-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-user-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.admin-user-name {
+  margin: 0;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.admin-user-email {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--gray-text);
+}
+
+/* ======================================================
+   ACTION SELECTS
+   ====================================================== */
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-action-select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--primary-bg-medium);
+  font-size: 0.75rem;
+  cursor: pointer;
+  background: white;
+}
+
+.admin-action-select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* ======================================================
+   FORM ELEMENTS
+   ====================================================== */
+
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.admin-form-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.admin-form-input,
+.admin-form-textarea,
+.admin-config-input {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--primary-bg-medium);
+  font-size: 0.875rem;
+  background: white;
+  transition: all 0.25s ease;
+}
+
+.admin-form-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.admin-form-input:focus,
+.admin-form-textarea:focus,
+.admin-config-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg-soft);
+}
+
+/* ======================================================
+   FORM HELP / EMPTY STATES
+   ====================================================== */
+
+.admin-no-data {
+  padding: 2rem;
+  text-align: center;
+  color: var(--gray-text);
+  font-size: 0.9rem;
+}
+
+/* ======================================================
+   TOGGLE SWITCH
+   ====================================================== */
+
+.admin-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-toggle-input {
+  display: none;
+}
+
+.admin-toggle-slider {
+  width: 46px;
+  height: 26px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.admin-toggle-dot {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.admin-toggle-input:checked + .admin-toggle-slider {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+}
+
+.admin-toggle-input:checked + .admin-toggle-slider .admin-toggle-dot {
+  transform: translateX(20px);
+}
+
+/* ======================================================
+   CONFIG SAVE BUTTON
+   ====================================================== */
+
+.admin-save-btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.admin-save-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px var(--primary-bg-strong);
+}
+
+
+/* ======================================================
+   PRODUCTS GRID
+   ====================================================== */
+
+.admin-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-product-card {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid var(--primary-bg-soft);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+.admin-product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--primary-light),
+    var(--primary-dark)
+  );
+}
+
+.admin-product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ======================================================
+   PRODUCT IMAGE
+   ====================================================== */
+
+.admin-product-image {
+  height: 200px;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.admin-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.admin-product-card:hover .admin-product-image img {
+  transform: scale(1.05);
+}
+
+/* ======================================================
+   PRODUCT CONTENT
+   ====================================================== */
+
+.admin-product-content {
+  padding: 1.5rem;
+}
+
+.admin-product-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-product-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.admin-product-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.admin-product-status.admin-status-green {
+  background: var(--primary-bg-soft);
+  color: var(--primary);
+}
+
+.admin-product-status.admin-status-orange {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+}
+
+/* ======================================================
+   PRODUCT META
+   ====================================================== */
+
+.admin-product-description {
+  font-size: 0.85rem;
+  color: var(--gray-text);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.admin-product-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.admin-product-price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.admin-product-category {
+  background: var(--primary-bg-soft);
+  color: var(--primary);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* ======================================================
+   PRODUCT CARBON INFO
+   ====================================================== */
+
+.admin-product-carbon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(30, 62, 167, 0.05);
+  border: 1px solid var(--primary-bg-soft);
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.admin-carbon-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--primary);
+}
+
+.admin-eco-badge {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+/* ======================================================
+   PRODUCT ACTIONS
+   ====================================================== */
+
+.admin-product-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-product-actions button {
+  flex: 1;
+  padding: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.admin-product-actions .view {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+}
+
+.admin-product-actions .delete {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+}
+
+/* ======================================================
+   CATEGORIES GRID
+   ====================================================== */
+
+.admin-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-category-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid var(--primary-bg-soft);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.admin-category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--primary-light)
+  );
+}
+
+.admin-category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ======================================================
+   CATEGORY CONTENT
+   ====================================================== */
+
+.admin-category-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin: 0 0 0.5rem;
+}
+
+.admin-category-description {
+  font-size: 0.85rem;
+  color: var(--gray-text);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* ======================================================
+   CATEGORY ACTIONS
+   ====================================================== */
+
+.admin-category-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-edit-btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-delete-btn {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ======================================================
+   SELLERS GRID
+   ====================================================== */
+
+.admin-sellers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 2rem;
+}
+
+.admin-seller-card {
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1px solid var(--primary-bg-soft);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+.admin-seller-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--primary-light),
+    var(--primary-dark)
+  );
+}
+
+.admin-seller-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ======================================================
+   SELLER HEADER
+   ====================================================== */
+
+.admin-seller-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.admin-seller-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.admin-seller-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+  font-weight: 800;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-seller-info h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark-text);
+}
+
+.admin-seller-info p {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: var(--gray-text);
+}
+
+/* ======================================================
+   SELLER STATS
+   ====================================================== */
+
+.admin-seller-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-stat-item {
+  background: var(--primary-bg-soft);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.admin-stat-label {
+  font-size: 0.7rem;
+  color: var(--gray-text);
+  font-weight: 600;
+}
+
+.admin-stat-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* ======================================================
+   SELLER ACTIONS
+   ====================================================== */
+
+.admin-seller-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+
+/* ======================================================
+   NOTIFICATION DROPDOWN
+   ====================================================== */
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 380px;
+  max-height: 500px;
+  background: linear-gradient(135deg, #ffffff 0%, #f4f6ff 100%);
+  border-radius: 18px;
+  border: 1px solid var(--primary-bg-soft);
+  box-shadow: 0 20px 40px rgba(30, 62, 167, 0.25);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  z-index: 1000;
+  animation: dropdownFadeIn 0.3s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ======================================================
+   NOTIFICATION HEADER
+   ====================================================== */
+
+.notification-header {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.mark-all-read-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mark-all-read-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ======================================================
+   NOTIFICATION LIST
+   ====================================================== */
+
+.notification-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.notification-item:hover {
+  background: var(--primary-bg-soft);
+  border-left-color: var(--primary);
+}
+
+.notification-item.unread {
+  background: rgba(30, 62, 167, 0.08);
+  border-left-color: var(--primary);
+}
+
+.notification-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 0.25rem;
+}
+
+.notification-message {
+  font-size: 0.8rem;
+  color: var(--gray-text);
+  line-height: 1.4;
+}
+
+.notification-time {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+/* ======================================================
+   NOTIFICATION FOOTER
+   ====================================================== */
+
+.notification-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--primary-bg-soft);
+  background: #f8fafc;
+}
+
+.view-all-notifications-btn {
+  width: 100%;
+  padding: 0.65rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: white;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.view-all-notifications-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px var(--primary-bg-strong);
+}
+
+/* ======================================================
+   MODAL OVERLAY
+   ====================================================== */
+
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ======================================================
+   MODAL CONTAINER
+   ====================================================== */
+
+.admin-modal-container {
+  width: 90%;
+  max-width: 600px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  animation: slideUp 0.35s ease;
+}
+
+/* ======================================================
+   MODAL HEADER
+   ====================================================== */
+
+.admin-modal-header {
+  padding: 1.25rem 1.75rem;
+  background: linear-gradient(
+    135deg,
+    #f8fafc,
+    #eef1ff
+  );
+  border-bottom: 1px solid var(--primary-bg-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-modal-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--dark-text);
+}
+
+.admin-modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(239, 68, 68, 0.12);
+  color: #EF4444;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-modal-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: scale(1.05);
+}
+
+/* ======================================================
+   MODAL BODY
+   ====================================================== */
+
+.admin-modal-body {
+  padding: 1.75rem;
+}
+
+/* ======================================================
+   MODAL ACTIONS
+   ====================================================== */
+
+.admin-modal-actions {
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  border-top: 1px solid var(--primary-bg-soft);
+}
+
+/* ======================================================
+   MODAL ANIMATIONS
+   ====================================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ======================================================
+   SPIN ANIMATION
+   ====================================================== */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+
+/* ======================================================
+   TABLET (≤ 1024px)
+   ====================================================== */
+
+@media (max-width: 1024px) {
+
+  .admin-sidebar {
+    width: 200px;
+  }
+
+  .admin-main {
+    padding: 1.25rem;
+  }
+
+  .admin-page-header {
+    padding: 1.5rem;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .admin-products-grid,
+  .admin-categories-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .admin-sellers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .notification-dropdown {
+    width: 340px;
+  }
+}
+
+/* ======================================================
+   MOBILE (≤ 768px)
+   ====================================================== */
+
+@media (max-width: 768px) {
+
+  /* HEADER */
+  .admin-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .admin-logo h1 {
+    font-size: 1.05rem;
+  }
+
+  .admin-user-name,
+  .admin-user-role {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .admin-content {
+    flex-direction: column;
+  }
+
+  /* SIDEBAR */
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--primary-bg-soft);
+    padding: 0.75rem 0;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding: 0 0.75rem;
+  }
+
+  .admin-nav-item {
+    flex-direction: column;
+    min-width: 72px;
+    font-size: 0.65rem;
+    padding: 0.5rem;
+  }
+
+  .admin-nav-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* MAIN */
+  .admin-main {
+    padding: 1rem;
+  }
+
+  /* PAGE HEADER */
+  .admin-page-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .admin-page-header p {
+    font-size: 0.9rem;
+  }
+
+  /* STATS */
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* SEARCH & FILTER */
+  .admin-search-filter {
+    flex-direction: column;
+  }
+
+  .admin-search {
+    min-width: 100%;
+  }
+
+  /* TABLE */
+  .admin-table {
+    min-width: 600px;
+  }
+
+  /* PRODUCTS */
+  .admin-products-grid,
+  .admin-categories-grid,
+  .admin-sellers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-product-image {
+    height: 160px;
+  }
+
+  /* MODALS */
+  .admin-modal-container {
+    width: 95%;
+  }
+
+  /* NOTIFICATIONS */
+  .notification-dropdown {
+    width: 95vw;
+    right: -10px;
+  }
+}
+
+/* ======================================================
+   SMALL MOBILE (≤ 480px)
+   ====================================================== */
+
+@media (max-width: 480px) {
+
+  .admin-header {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .admin-logo-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .admin-nav-item {
+    min-width: 64px;
+  }
+
+  .admin-page-header {
+    padding: 1.25rem;
+  }
+
+  .admin-page-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .admin-product-content,
+  .admin-category-card,
+  .admin-seller-card {
+    padding: 1.25rem;
+  }
+
+  .admin-product-actions button {
+    flex: 1 1 100%;
+  }
+
+  .notification-item {
+    padding: 0.75rem 1rem;
   }
 }

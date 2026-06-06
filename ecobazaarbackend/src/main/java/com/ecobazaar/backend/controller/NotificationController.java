@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/notifications")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin // Uses global CORS config from SecurityConfig
 public class NotificationController {
 
     @Autowired

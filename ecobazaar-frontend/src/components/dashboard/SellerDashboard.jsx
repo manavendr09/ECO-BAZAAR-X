@@ -233,18 +233,18 @@ const SellerDashboard = () => {
   const currentUser = authAPI.getCurrentUser();
   
   // Helper function to get proper image URL
-  const getImageUrl = (imageUrl) => {
-    if (!imageUrl) {
-      return null;
-    }
-    // If it's a relative path (uploaded image), prepend backend URL
-    if (imageUrl.startsWith('/uploads/')) {
-      const fullUrl = `http://localhost:8080${imageUrl}`;
-      return fullUrl;
-    }
-    // If it's already a full URL, return as is
-    return imageUrl;
-  };
+  // const getImageUrl = (imageUrl) => {
+  //   if (!imageUrl) {
+  //     return null;
+  //   }
+  //   // If it's a relative path (uploaded image), prepend backend URL
+  //   if (imageUrl.startsWith('/uploads/')) {
+  //     const fullUrl = `http://localhost:8080${imageUrl}`;
+  //     return fullUrl;
+  //   }
+  //   // If it's already a full URL, return as is
+  //   return imageUrl;
+  // };
 
   const loadNotifications = async () => {
     if (currentUser && currentUser.userId) {
@@ -730,11 +730,11 @@ const SellerDashboard = () => {
           </div>
           <div className="seller-user-info">
             <div className="seller-avatar">
-              <img 
+              {/* <img 
                 src="/EcobazaarX Icon.ico" 
                 alt="EcoBazaarX Icon" 
                 className="seller-avatar-image"
-              />
+              /> */}
             </div>
             <div className="seller-user-details">
               <span className="seller-user-name">{profile.businessName || 'Seller'}</span>

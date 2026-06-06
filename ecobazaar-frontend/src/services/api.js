@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-// Create axios instance with base configuration
-const API_BASE_URL = 'http://localhost:8081/api';
+// Base URL is set via environment variable.
+// Local dev: set in ecobazaar-frontend/.env  →  VITE_API_BASE_URL=http://localhost:8081/api
+// Production: set in Vercel dashboard          →  VITE_API_BASE_URL=https://<your-render-app>.onrender.com/api
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8081/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,

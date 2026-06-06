@@ -4,6 +4,7 @@ package com.ecobazaar.backend.config;
 import com.ecobazaar.backend.security.JwtAuthenticationFilter;
 import com.ecobazaar.backend.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,11 +20,16 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
+
+    // Reads from application.properties → allowed.origins (set via ALLOWED_ORIGINS env var)
+    @Value("${allowed.origins:http://localhost:5173}")
+    private String allowedOriginsRaw;
+
     @Autowired
     private JwtAuthenticationFilter jwtAuthFilter;
     
@@ -75,11 +81,16 @@ public class SecurityConfig {
     
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+        // Support multiple origins separated by commas e.g.:
+        // https://ecobazaar.vercel.app,http://localhost:5173
+        List<String> origins = Arrays.asList(allowedOriginsRaw.split(","));
+
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedOrigins(origins);
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

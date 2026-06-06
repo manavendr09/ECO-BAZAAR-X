@@ -1,6 +1,6 @@
 /* Login Component - Premium Professional Design */
 
-.login-container {
+/* .login-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -9,7 +9,7 @@
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #FEF7ED 0%, #FFFFFF 50%, #D1FAE5 100%);
-}
+} */
 
 .login-background {
   position: absolute;

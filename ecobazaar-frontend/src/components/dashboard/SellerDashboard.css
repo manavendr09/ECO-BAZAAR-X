@@ -10,12 +10,12 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  background: linear-gradient(135deg, #1E3EA7 0%, #1E3EA7 100%);
   color: white;
   padding: 1.25rem 2rem;
   box-shadow: 
-    0 8px 32px rgba(16, 185, 129, 0.2),
-    0 4px 16px rgba(16, 185, 129, 0.1),
+    0 8px 32px rgba(30, 62, 167, 0.2),
+    0 4px 16px rgba(30, 62, 167, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   display: flex;
@@ -395,14 +395,14 @@
 }
 
 .seller-nav-item:hover {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  background: rgba(30, 62, 167, 0.1);
+  color: #1E3EA7;
 }
 
 .seller-nav-item.active {
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(30, 62, 167, 0.3);
 }
 
 .seller-nav-icon {
@@ -467,7 +467,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   border: none;
   border-radius: 8px;
@@ -479,7 +479,7 @@
 
 .seller-refresh-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(30, 62, 167, 0.4);
 }
 
 .seller-refresh-icon {
@@ -525,7 +525,7 @@
 }
 
 .seller-stat-green .seller-stat-icon {
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
 }
 
 .seller-stat-purple .seller-stat-icon {
@@ -572,8 +572,8 @@
 }
 
 .seller-stat-change.positive {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  background: rgba(30, 62, 167, 0.1);
+  color: #1E3EA7;
 }
 
 .seller-stat-change.negative {
@@ -626,10 +626,10 @@
 }
 
 .seller-action-btn:hover {
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(30, 62, 167, 0.4);
 }
 
 .seller-action-icon {
@@ -678,7 +678,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
 }
 
 .seller-order-icon-svg {
@@ -772,7 +772,7 @@
 .seller-chart-icon {
   width: 32px;
   height: 32px;
-  color: #10B981;
+  color: #1E3EA7;
 }
 
 /* Search and Filter */
@@ -811,8 +811,8 @@
 
 .seller-search-input:focus {
   outline: none;
-  border-color: #10B981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  border-color: #1E3EA7;
+  box-shadow: 0 0 0 3px rgba(30, 62, 167, 0.1);
 }
 
 .seller-filter {
@@ -935,14 +935,14 @@
 }
 
 .seller-stock-btn:hover {
-  background: rgba(16, 185, 129, 0.1);
-  border-color: #10B981;
+  background: rgba(30, 62, 167, 0.1);
+  border-color:  #1E3EA7;
 }
 
 .seller-stock-icon {
   width: 16px;
   height: 16px;
-  color: #10B981;
+  color: #1E3EA7;
 }
 
 .seller-stock-value {
@@ -964,8 +964,8 @@
 }
 
 .seller-status-green {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  background: rgba(30, 62, 167, 0.1);
+  color: #1E3EA7;
 }
 
 .seller-status-yellow {
@@ -1000,12 +1000,12 @@
 .seller-carbon-icon {
   width: 16px;
   height: 16px;
-  color: #10B981;
+  color: #1E3EA7;
 }
 
 .seller-eco-badge {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10B981;
+  background: rgba(30, 62, 167, 0.1);
+  color: #1E3EA7 ;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -1054,7 +1054,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   border: none;
   border-radius: 8px;
@@ -1282,7 +1282,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   border: none;
   border-radius: 8px;
@@ -1353,8 +1353,8 @@
 .seller-form-textarea:focus,
 .seller-form-select:focus {
   outline: none;
-  border-color: #10B981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  border-color: #1E3EA7;
+  box-shadow: 0 0 0 3px rgba(30, 62, 167, 0.1);
 }
 
 .seller-form-textarea {
@@ -1378,12 +1378,12 @@
 .seller-checkbox {
   width: 18px;
   height: 18px;
-  accent-color: #10B981;
+  accent-color: #1E3EA7;
 }
 
 .seller-form-file {
   padding: 0.5rem;
-  border: 2px dashed rgba(16, 185, 129, 0.2);
+  border: 2px dashed rgba(30, 62, 167, 0.2);
   border-radius: 8px;
   background: rgba(248, 250, 252, 0.5);
   cursor: pointer;
@@ -1391,7 +1391,7 @@
 
 .seller-save-btn {
   padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   border: none;
   border-radius: 8px;
@@ -1404,7 +1404,7 @@
 
 .seller-save-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(30, 62, 167, 0.3);
 }
 
 /* Modal Styles */
@@ -1519,7 +1519,7 @@
 
 .seller-submit-btn {
   padding: 0.75rem 1rem;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   border: none;
   border-radius: 8px;
@@ -1531,7 +1531,7 @@
 
 .seller-submit-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(30, 62, 167, 0.3);
 }
 
 .seller-submit-btn:disabled {
@@ -1667,7 +1667,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #10B981, #059669);
+  background: linear-gradient(90deg, #1E3EA7, #1E3EA7);
 }
 
 .seller-inventory-card.seller-inventory-low::before {
@@ -1688,7 +1688,7 @@
 }
 
 .seller-inventory-icon {
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   padding: 1rem;
   border-radius: 12px;
@@ -1929,11 +1929,11 @@
 }
 
 .seller-restock-btn.seller-restock-medium {
-  background: #10B981;
+  background: #1E3EA7;
 }
 
 .seller-restock-btn.seller-restock-medium:hover {
-  background: #059669;
+  background: #1E3EA7;
 }
 
 .seller-no-alerts {
@@ -1988,8 +1988,8 @@
 
 .seller-search-input:focus {
   outline: none;
-  border-color: #10B981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  border-color: #1E3EA7;
+  box-shadow: 0 0 0 3px rgba(30, 62, 167, 0.1);
 }
 
 .seller-filter-select {
@@ -2003,8 +2003,8 @@
 
 .seller-filter-select:focus {
   outline: none;
-  border-color: #10B981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  border-color: #1E3EA7;
+  box-shadow: 0 0 0 3px rgba(30, 62, 167, 0.1);
 }
 
 .seller-inventory-table {
@@ -2135,11 +2135,11 @@
 
 .seller-stock-btn:hover {
   background: #F8FAFC;
-  border-color: #10B981;
+  border-color: #1E3EA7;
 }
 
 .seller-stock-btn.seller-stock-add {
-  color: #10B981;
+  color: #1E3EA7;
 }
 
 .seller-stock-btn.seller-stock-edit {
@@ -2179,11 +2179,11 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #10B981, #059669);
+  background: linear-gradient(90deg, #1E3EA7, #1E3EA7);
 }
 
 .seller-carbon-card.seller-carbon-trees::before {
-  background: linear-gradient(90deg, #059669, #047857);
+  background: linear-gradient(90deg, #1E3EA7, #1E3EA7);
 }
 
 .seller-carbon-card.seller-carbon-cars::before {
@@ -2200,7 +2200,7 @@
 }
 
 .seller-carbon-icon {
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   padding: 1rem;
   border-radius: 12px;
@@ -2212,7 +2212,7 @@
 }
 
 .seller-carbon-icon.seller-carbon-trees {
-  background: linear-gradient(135deg, #059669, #047857);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
 }
 
 .seller-carbon-icon.seller-carbon-cars {
@@ -2318,7 +2318,7 @@
 }
 
 .seller-legend-green {
-  background: #10B981;
+  background: #1E3EA7;
 }
 
 .seller-chart-bars {
@@ -2348,7 +2348,7 @@
 }
 
 .seller-chart-bar-fill {
-  background: linear-gradient(180deg, #10B981, #059669);
+  background: linear-gradient(180deg, #1E3EA7, #1E3EA7);
   transition: height 0.3s ease;
   position: absolute;
   bottom: 0;
@@ -2504,7 +2504,7 @@
 }
 
 .seller-impact-icon {
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   color: white;
   padding: 1rem;
   border-radius: 12px;
@@ -2604,7 +2604,7 @@
 
 .seller-goal-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #10B981, #059669);
+  background: linear-gradient(90deg, #1E3EA7, #1E3EA7);
   transition: width 0.3s ease;
 }
 
@@ -2642,7 +2642,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #10B981, #3B82F6, #8B5CF6, #F59E0B);
+  background: linear-gradient(90deg, #1E3EA7, #3B82F6, #8B5CF6, #F59E0B);
   border-radius: 24px 24px 0 0;
 }
 
@@ -2659,7 +2659,7 @@
 .seller-inventory-main-icon {
   width: 64px;
   height: 64px;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -2672,7 +2672,7 @@
   content: '';
   position: absolute;
   inset: -2px;
-  background: linear-gradient(45deg, #10B981, #3B82F6, #8B5CF6);
+  background: linear-gradient(45deg, #1E3EA7, #3B82F6, #8B5CF6);
   border-radius: 18px;
   z-index: -1;
   animation: rotateInventory 4s linear infinite;
@@ -2738,12 +2738,12 @@
   display: block;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #10B981;
+  color: #1E3EA7;
   margin-bottom: 0.25rem;
 }
 
 .seller-stat-mini.eco .seller-stat-mini-value {
-  color: #22C55E;
+  color: #1E3EA7;
 }
 
 .seller-stat-mini-label {
@@ -2757,7 +2757,7 @@
 .seller-refresh-premium-btn,
 .seller-refresh-eco-btn {
   position: relative;
-  background: linear-gradient(135deg, #10B981, #059669);
+  background: linear-gradient(135deg, #1E3EA7, #1E3EA7);
   border: none;
   border-radius: 12px;
   color: white;
@@ -2771,7 +2771,7 @@
 }
 
 .seller-refresh-eco-btn {
-  background: linear-gradient(135deg, #22C55E, #16A34A);
+  background: linear-gradient(135deg,  (#1E3EA7)(#1E3EA7), (#1E3EA7)(#1E3EA7) );
   box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
 }
 
@@ -4021,3 +4021,4 @@
     max-height: 150px;
   }
 }
+
