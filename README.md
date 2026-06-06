@@ -1,6 +1,5 @@
 <div align="center">
 
-![ECOBazaarX Banner](./assets/banner.png)
 
 # 🌿 ECOBazaarX
 
@@ -34,6 +33,8 @@ The platform supports **three user roles** — Customer, Seller, and Admin — e
 > 🌱 *Shop smarter. Shop greener.*
 
 ---
+<img width="1832" height="906" alt="Screenshot 2026-06-07 013646" src="https://github.com/user-attachments/assets/d713c94b-8795-4e7e-8c6f-6253c9dd06cf" />
+
 
 ## 🔗 Live Links
 
