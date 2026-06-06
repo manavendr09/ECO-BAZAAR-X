@@ -31,16 +31,18 @@ public class EmailService {
             String customerEmail = order.getUser().getEmail();
             if (customerEmail == null || customerEmail.isBlank()) return;
 
+            String name = order.getUser().getFirstName() + " " + order.getUser().getLastName();
+
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(customerEmail);
             message.setSubject("EcoBazaarX - Order Confirmed! #" + order.getId());
             message.setText(
-                "Hi " + order.getUser().getName() + ",\n\n" +
+                "Hi " + name + ",\n\n" +
                 "Your order #" + order.getId() + " has been placed successfully!\n\n" +
-                "Order Total: ₹" + order.getTotalPrice() + "\n" +
+                "Order Total: Rs." + order.getTotalPrice() + "\n" +
                 "Status: " + order.getStatus() + "\n" +
                 "Shipping Address: " + order.getShippingAddress() + "\n\n" +
-                "Thank you for shopping eco-friendly! 🌿\n\n" +
+                "Thank you for shopping eco-friendly!\n\n" +
                 "Team EcoBazaarX"
             );
             mailSender.send(message);
@@ -55,14 +57,16 @@ public class EmailService {
             String customerEmail = order.getUser().getEmail();
             if (customerEmail == null || customerEmail.isBlank()) return;
 
+            String name = order.getUser().getFirstName() + " " + order.getUser().getLastName();
+
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(customerEmail);
             message.setSubject("EcoBazaarX - Order Shipped! #" + order.getId());
             message.setText(
-                "Hi " + order.getUser().getName() + ",\n\n" +
+                "Hi " + name + ",\n\n" +
                 "Great news! Your order #" + order.getId() + " has been shipped.\n\n" +
                 "Tracking Number: " + order.getTrackingNumber() + "\n\n" +
-                "Thank you for shopping eco-friendly! 🌿\n\n" +
+                "Thank you for shopping eco-friendly!\n\n" +
                 "Team EcoBazaarX"
             );
             mailSender.send(message);
