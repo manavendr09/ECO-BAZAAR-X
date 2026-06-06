@@ -1,59 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ShoppingCart, 
-  Trash2, 
-  Plus, 
-  Minus, 
+import {
+  ShoppingCart,
+  Trash2,
+  Plus,
+  Minus,
   ArrowLeft,
   Leaf,
-  Loader2
+  Loader2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { customerAPI } from '../services/api';
-import CarbonScore from '../components/common/CarbonScore';
+import GreenerAlternative from '../components/cart/GreenerAlternative';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Load cart data on component mount
+  // Load cart data from localStorage on component mount
   useEffect(() => {
     const loadCart = async () => {
       try {
         setLoading(true);
         setError('');
         const response = await customerAPI.getCart();
-        setCartItems(response.data);
+        setCartItems(response.data || []);
       } catch (err) {
         console.error('Error loading cart:', err);
         setError('Failed to load cart items. Please try again.');
-        // Fallback to mock data if API fails
-        setCartItems([
-          {
-            id: 1,
-            name: "Organic Cotton T-Shirt",
-            price: 29.99,
-            quantity: 2,
-            image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop",
-            ecoScore: 95
-          },
-          {
-            id: 2,
-            name: "Bamboo Water Bottle",
-            price: 24.99,
-            quantity: 1,
-            image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=300&h=300&fit=crop",
-            ecoScore: 98
-          }
-        ]);
       } finally {
         setLoading(false);
       }
     };
 
     loadCart();
+    
+    // Listen for cart updates from other components
+    const handleCartUpdate = () => {
+      loadCart();
+    };
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    
+    return () => {
+      window.removeEventListener('cartUpdated', handleCartUpdate);
+    };
   }, []);
 
   const updateQuantity = async (id, newQuantity) => {
@@ -61,11 +52,10 @@ const Cart = () => {
     
     try {
       await customerAPI.updateCartItem(id, { quantity: newQuantity });
-      setCartItems(items =>
-        items.map(item =>
-          item.id === id ? { ...item, quantity: newQuantity } : item
-        )
-      );
+      const response = await customerAPI.getCart();
+      setCartItems(response.data || []);
+      // Dispatch event to update cart count in navbar
+      window.dispatchEvent(new Event('cartUpdated'));
     } catch (error) {
       console.error('Error updating quantity:', error);
     }
@@ -74,13 +64,23 @@ const Cart = () => {
   const removeItem = async (id) => {
     try {
       await customerAPI.removeFromCart(id);
-      setCartItems(items => items.filter(item => item.id !== id));
+      const response = await customerAPI.getCart();
+      setCartItems(response.data || []);
+      // Dispatch event to update cart count in navbar
+      window.dispatchEvent(new Event('cartUpdated'));
     } catch (error) {
       console.error('Error removing item:', error);
     }
   };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const handleReplaceItem = async (newItem) => {
+    // Reload cart after replacement
+    const response = await customerAPI.getCart();
+    setCartItems(response.data || []);
+    window.dispatchEvent(new Event('cartUpdated'));
+  };
+
+  const subtotal = cartItems.reduce((sum, item) => sum + (Number(item.price) * item.quantity), 0);
   const shipping = subtotal >= 50 ? 0 : 5.99;
   const tax = subtotal * 0.08; // 8% tax
   const total = subtotal + shipping + tax;
@@ -147,20 +147,24 @@ const Cart = () => {
                 >
                   <div className="flex items-center space-x-4">
                     <img
-                      src={item.image}
+                      src={item.image || item.imageUrl || 'https://via.placeholder.com/80'}
                       alt={item.name}
                       className="w-20 h-20 object-cover rounded-lg"
                     />
                     
                     <div className="flex-1">
                       <h3 className="font-semibold text-gray-900 mb-1">{item.name}</h3>
-                      <div className="flex items-center space-x-2 mb-2">
-                        <span className="eco-badge">
-                          <Leaf size={12} className="inline mr-1" />
-                          {item.ecoScore}% Eco
-                        </span>
+                      {item.ecoScore && (
+                        <div className="flex items-center space-x-2 mb-2">
+                          <span className="eco-badge">
+                            <Leaf size={12} className="inline mr-1" />
+                            {item.ecoScore}% Eco
+                          </span>
+                        </div>
+                      )}
+                      <div className="text-lg font-bold text-gray-900">
+                        ₹{Number(item.price).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                       </div>
-                      <div className="text-lg font-bold text-gray-900">₹{item.price.toLocaleString('en-IN')}</div>
                     </div>
                     
                     <div className="flex items-center space-x-2">
@@ -181,7 +185,7 @@ const Cart = () => {
                     
                     <div className="text-right">
                       <div className="text-lg font-bold text-gray-900">
-                        ₹{(item.price * item.quantity).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                        ₹{(Number(item.price) * item.quantity).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                       </div>
                       <button
                         onClick={() => removeItem(item.id)}
@@ -191,6 +195,13 @@ const Cart = () => {
                       </button>
                     </div>
                   </div>
+                  
+                  {/* Greener Alternative Suggestion */}
+                  <GreenerAlternative
+                    productId={item.productId || item.id}
+                    currentProduct={item}
+                    onReplace={handleReplaceItem}
+                  />
                 </motion.div>
               ))}
             </div>

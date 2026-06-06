@@ -98,6 +98,8 @@ const ProductCard = ({ product, showQuickView = true, showAddToCart = true }) =>
       await customerAPI.addToCart(cartItem);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 2000);
+      // Dispatch event to update cart count in navbar
+      window.dispatchEvent(new Event('cartUpdated'));
     } catch (error) {
       console.error('Error adding to cart:', error);
     } finally {

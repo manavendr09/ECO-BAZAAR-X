@@ -29,4 +29,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     
     @Query("SELECT p FROM Product p ORDER BY p.createdAt DESC")
     List<Product> findAllOrderByCreatedAtDesc();
+    
+    @Query("SELECT p FROM Product p LEFT JOIN FETCH p.category LEFT JOIN FETCH p.seller WHERE p.id = :id")
+    Product findByIdWithRelations(@Param("id") Long id);
 }

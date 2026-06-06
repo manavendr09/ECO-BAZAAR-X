@@ -24,14 +24,14 @@ public class Product {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
-    @JsonIgnoreProperties({"products"})
+    @JsonIgnoreProperties({"products", "hibernateLazyInitializer", "handler"})
     private Category category;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seller_id", nullable = false)
-    @JsonIgnoreProperties({"products", "password", "orders"})
+    @JsonIgnoreProperties({"products", "password", "orders", "hibernateLazyInitializer", "handler"})
     private User seller;
     
     @Column(name = "weight_kg", precision = 8, scale = 3)
